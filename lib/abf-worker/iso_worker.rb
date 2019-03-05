@@ -2,7 +2,7 @@ require_relative 'runners/iso'
 require_relative 'inspectors/live_inspector'
 
 module AbfWorker
-  class IsoWorkerResque < BaseWorker
+  class IsoWorker < BaseWorker
     attr_accessor :runner,
                   :live_logger,
                   :file_logger
@@ -34,12 +34,6 @@ module AbfWorker
       })
     end
 
-  end
-
-  class IsoWorker
-    def perform(options)
-      IsoWorkerResque.perform(options)
-    end
   end
 
 end
