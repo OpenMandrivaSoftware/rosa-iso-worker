@@ -25,7 +25,7 @@ module AbfWorker::Runners
         prepare_script
         exit_status = nil
         final_command = [
-          "docker run --name #{@container_name}",
+          "docker run --name #{@container_name} --rm --privileged=true",
           "--add-host abf-downloads.rosalinux.ru:192.168.76.91",
           "--add-host file-store.rosalinux.ru:192.168.76.92",
           "-v #{File.join(ROOT, 'iso_builder')}:/iso_builder",
