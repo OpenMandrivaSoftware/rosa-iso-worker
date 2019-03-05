@@ -12,7 +12,7 @@ module AbfWorker
           next if @buffer.empty?
           @log_mutex.synchronize do
             str = @buffer.join
-            Redis.current.setex(@key_name, LOG_DUMP_INTERVAL + 5, str) rescue nil
+            Resque.redis.setex(@key_name, LOG_DUMP_INTERVAL + 5, str) rescue nil
           end
         end
       end

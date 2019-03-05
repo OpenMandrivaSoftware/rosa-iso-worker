@@ -38,7 +38,7 @@ module AbfWorker::Inspectors
 
     def status
       q = 'abfworker::iso-worker-' + @worker.build_id.to_s + '::live-inspector'
-      Redis.current.get(q)
+      Resque.redis.get(q)
     end
 
     def stop_build
