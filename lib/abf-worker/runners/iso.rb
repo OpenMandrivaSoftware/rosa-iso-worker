@@ -28,6 +28,7 @@ module AbfWorker::Runners
           "docker run --name #{@container_name} --rm --privileged=true",
           "--add-host abf-downloads.rosalinux.ru:192.168.76.91",
           "--add-host file-store.rosalinux.ru:192.168.76.92",
+          "--device /dev/loop-control:/dev/loop-control",
           "-v #{File.join(ROOT, 'iso_builder')}:/iso_builder",
           "-v #{APP_CONFIG['output_folder']}:/home/vagrant/results",
           "-v #{APP_CONFIG['output_folder']}:/home/vagrant/archives",
