@@ -74,7 +74,7 @@ module AbfWorker
       uploaded = []
       results_folder = APP_CONFIG["output_folder"]
       if File.exists?(results_folder) && File.directory?(results_folder)
-        Dir.new(results_folder).entries.each do |f|
+        Dir.glob(File.join(results_folder, '**', '*')).each do |f|
           uploaded << upload_file_to_file_store(results_folder, f)
         end
       end

@@ -33,7 +33,7 @@ module AbfWorker::Runners
           "-v #{APP_CONFIG['output_folder']}:/home/vagrant/results",
           "-v #{APP_CONFIG['output_folder']}:/home/vagrant/archives",
           @docker_container,
-          "/bin/bash -c '#{@params} /iso_builder/#{@command}'"
+          "/bin/bash -c '#{@params} /bin/bash /iso_builder/#{@command}'"
         ].join(' ')
         process = IO.popen(final_command, 'r', :err=>[:child, :out]) do |io|
           while true
