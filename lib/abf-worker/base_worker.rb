@@ -48,8 +48,8 @@ module AbfWorker
       @file_store_token ||= APP_CONFIG['file_store']['token']
     end
 
-    def upload_file_to_file_store(path, file_name)
-      path_to_file = path + '/' + file_name
+    def upload_file_to_file_store(file_name)
+      path_to_file = file_name
       return unless File.file?(path_to_file)
 
       sha1 = Digest::SHA1.file(path_to_file).hexdigest
@@ -74,8 +74,8 @@ module AbfWorker
       uploaded = []
       results_folder = APP_CONFIG["output_folder"]
       if File.exists?(results_folder) && File.directory?(results_folder)
-        Dir.glob(File.join(results_folder, '**', '*')).each do |f|
-          uploaded << upload_file_to_file_store(results_folder, f)
+        Dir.glob(File.join(results_folder, '**', '*')).each do |filename|
+          uploaded << upload_file_to_file_store(filename)
         end
       end
       uploaded.compact
