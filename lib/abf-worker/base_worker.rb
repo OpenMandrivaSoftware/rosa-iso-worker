@@ -67,7 +67,7 @@ module AbfWorker
       end
 
       system "sudo rm -rf #{path_to_file}"
-      {:sha1 => sha1, :file_name => file_name, :size => file_size}
+      {:sha1 => sha1, :file_name => File.basename(file_name), :size => file_size}
     end
 
     def upload_results_to_file_store
