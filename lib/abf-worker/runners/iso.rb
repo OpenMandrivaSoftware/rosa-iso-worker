@@ -29,11 +29,11 @@ module AbfWorker::Runners
           "--add-host abf-downloads.rosalinux.ru:192.168.76.91",
           "--add-host file-store.rosalinux.ru:192.168.76.92",
           "--device /dev/loop-control:/dev/loop-control",
-          "-v #{File.join(ROOT, 'iso_builder')}:/iso_builder",
+          "-v #{File.join(ROOT, 'iso_builder')}:/home/vagrant/iso_builder",
           "-v #{APP_CONFIG['output_folder']}:/home/vagrant/results",
           "-v #{APP_CONFIG['output_folder']}:/home/vagrant/archives",
           @docker_container,
-          "/bin/bash -c '#{@params} /bin/bash /iso_builder/#{@command}'"
+          "/bin/bash -c '#{@params} /bin/bash /home/vagrant/iso_builder/#{@command}'"
         ].join(' ')
         process = IO.popen(final_command, 'r', :err=>[:child, :out]) do |io|
           while true
