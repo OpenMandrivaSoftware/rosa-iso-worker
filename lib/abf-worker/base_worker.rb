@@ -55,7 +55,9 @@ module AbfWorker
       sha1 = Digest::SHA1.file(path_to_file).hexdigest
       file_size = (File.size(path_to_file).to_f / TWO_IN_THE_TWENTIETH).round(2)
 
-      if %x[ curl #{APP_CONFIG['file_store']['url']}.json?hash=#{sha1} ] == '[]'
+      loop do
+        ret = %x[ curl #{APP_CONFIG['file_store']['url']}.json?hash=#{sha1} ]
+        break if ret.include?(sha1)
         command = 'curl --user '
         command << file_store_token
         command << ': -POST -F "file_store[file]=@'
