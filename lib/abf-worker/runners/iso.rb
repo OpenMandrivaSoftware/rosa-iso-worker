@@ -10,7 +10,7 @@ module AbfWorker::Runners
       @command      = options['main_script']
       @docker_container = case options['platform']['type']
       when 'mdv'
-        'rosalab/rosa2019.0'
+        'rosalab/rosa2016.1'
       when 'rhel'
         'rosalab/rels7'
       end
