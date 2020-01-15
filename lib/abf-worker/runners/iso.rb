@@ -8,11 +8,15 @@ module AbfWorker::Runners
       @params       = options['params']
       @srcpath      = options['srcpath']
       @command      = options['main_script']
-      @docker_container = case options['platform']['type']
-      when 'mdv'
-        'rosalab/rosa2016.1'
-      when 'rhel'
-        'rosalab/rels7'
+      if options['platform']['name'] == 'rosa2019.1'
+        @docker_container = 'rosalab/rosa2019.1'
+      else
+        @docker_container = case options['platform']['type']
+        when 'mdv'
+          'rosalab/rosa2016.1'
+        when 'rhel'
+          'rosalab/rels7'
+        end
       end
       system 'docker pull ' + @docker_container
       @container_name = "iso#{options['id']}"
