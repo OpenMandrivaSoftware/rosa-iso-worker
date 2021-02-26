@@ -8,13 +8,20 @@ module AbfWorker::Runners
       @params       = options['params']
       @srcpath      = options['srcpath']
       @command      = options['main_script']
-      @docker_container = case options['platform']['type']
-      when 'dnf'
-        'rosalab/rosa2019.1'
-      when 'mdv'
-        'rosalab/rosa2016.1'
-      when 'rhel'
-        'rosalab/rels7'
+      arch = @params.split(' ').find { |x| x.start_with('ARCH=') } || 'default'
+      arch.gsub!('ARCH=')
+
+      @docker_container = if arch == 'aarch64'
+        'rosalab/rosa2019.1:aarch64'
+      else
+        case options['platform']['type']
+        when 'dnf'
+          'rosalab/rosa2019.1'
+        when 'mdv'
+          'rosalab/rosa2016.1'
+        when 'rhel'
+          'rosalab/rels7'
+        end
       end
       system 'docker pull ' + @docker_container
       @container_name = "iso#{options['id']}"
