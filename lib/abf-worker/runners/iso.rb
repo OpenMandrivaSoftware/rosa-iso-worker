@@ -9,7 +9,7 @@ module AbfWorker::Runners
       @srcpath      = options['srcpath']
       @command      = options['main_script']
       arch = @params.split(' ').find { |x| x.start_with?('ARCH=') } || 'default'
-      arch.gsub!('ARCH=')
+      arch.gsub!('ARCH=', '')
 
       @docker_container = if arch == 'aarch64'
         'rosalab/rosa2019.1:aarch64'
