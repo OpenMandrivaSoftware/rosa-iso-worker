@@ -8,7 +8,7 @@ module AbfWorker::Runners
       @params       = options['params']
       @srcpath      = options['srcpath']
       @command      = options['main_script']
-      arch = @params.split(' ').find { |x| x.start_with('ARCH=') } || 'default'
+      arch = @params.split(' ').find { |x| x.start_with?('ARCH=') } || 'default'
       arch.gsub!('ARCH=')
 
       @docker_container = if arch == 'aarch64'
