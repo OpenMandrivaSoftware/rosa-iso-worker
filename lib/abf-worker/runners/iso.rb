@@ -20,7 +20,11 @@ module AbfWorker::Runners
         when 'mdv'
           'rosalab/rosa2016.1'
         when 'rhel'
-          'rosalab/rels7'
+          if options['platform']['name'] == 'arsenic'
+            'fedora:rawhide'
+          else
+            'rosalab/rels7'
+          end
         end
       end
       system 'docker pull ' + @docker_container
