@@ -12,11 +12,11 @@ module AbfWorker::Runners
       arch.gsub!('ARCH=', '')
 
       @docker_container = if arch == 'aarch64'
-        'rosalab/rosa2021.1:aarch64'
+        'rosalab/rosa2019.1:aarch64'
       else
         case options['platform']['type']
         when 'dnf'
-          'rosalab/rosa2021.1'
+          'rosalab/rosa2019.1'
         when 'mdv'
           'rosalab/rosa2016.1'
         when 'rhel'
