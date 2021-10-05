@@ -16,7 +16,11 @@ module AbfWorker::Runners
       else
         case options['platform']['type']
         when 'dnf'
-          'rosalab/rosa2021.1'
+          if options['platform']['name'] == 'rosa2019.05'
+            'rosalab/rosa2019.05'
+          else
+            'rosalab/rosa2021.1'
+          end
         when 'mdv'
           'rosalab/rosa2016.1'
         when 'rhel'
