@@ -27,7 +27,7 @@ module AbfWorker::Runners
           if options['platform']['name'] == 'arsenic'
             'fedora:rawhide'
           else
-            'almalinux:9'
+            'oraclelinux:9'
           end
         end
       end
