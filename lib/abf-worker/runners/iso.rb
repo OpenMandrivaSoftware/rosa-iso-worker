@@ -21,7 +21,7 @@ module AbfWorker::Runners
           if options['platform']['name'] == 'rosa2019.05'
             'rosalab/rosa2019.05'
           else
-            'rosalab/rosa2021.1'
+            'rosalab/rosa13'
           end
         when 'rhel'
           if options['platform']['name'] == 'arsenic'
