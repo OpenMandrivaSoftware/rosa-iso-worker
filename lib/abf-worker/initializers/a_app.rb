@@ -10,4 +10,4 @@ $redis = Redis.new(host: "redis")
 
 APP_CONFIG = YAML.load(ERB.new(File.read(File.join(ROOT, "config", "application.yml"))).result)
 APP_CONFIG['output_folder'] = ROOT + 'output'
-Dir.mkdir(APP_CONFIG['output_folder']) if !Dir.exists?(APP_CONFIG['output_folder'])
+Dir.mkdir(APP_CONFIG['output_folder']) if !Dir.exist?(APP_CONFIG['output_folder'])
