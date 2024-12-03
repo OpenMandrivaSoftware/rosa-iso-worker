@@ -11,8 +11,10 @@ module AbfWorker::Runners
       arch = @params.split(' ').find { |x| x.start_with?('ARCH=') } || 'default'
       arch.gsub!('ARCH=', '')
 
-      @docker_container = if arch == 'aarch64'
-        'rosalab/rosa2021.1:aarch64'
+      @docker_container = if arch == 'aarch64' && options['platform']['name'] == 'rosa13'
+        'rosalab/rosa13:aarch64'
+      elsif arch == 'x86_64' && options['platform']['name'] == 'rosa13'
+        'rosalab/rosa13:latest'
       else
         case options['platform']['type']
         when 'dnf'
@@ -21,8 +23,6 @@ module AbfWorker::Runners
           else
             'rosalab/rosa2021.1'
           end
-        when 'mdv'
-          'rosalab/rosa2016.1'
         when 'rhel'
           if options['platform']['name'] == 'arsenic'
             'fedora:rawhide'
@@ -31,6 +31,7 @@ module AbfWorker::Runners
           end
         end
       end
+
       system 'docker pull ' + @docker_container
       @container_name = "iso#{options['id']}"
     end
