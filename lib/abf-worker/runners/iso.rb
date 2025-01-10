@@ -15,6 +15,8 @@ module AbfWorker::Runners
         'rosalab/rosa13:aarch64'
       elsif arch == 'x86_64' && options['platform']['name'] == 'rosa13'
         'rosalab/rosa13:latest'
+      elsif options['platform']['name'] == 'rosa2021.1'
+        'rosalab/rosa2021.1'
       else
         case options['platform']['type']
         when 'dnf'
